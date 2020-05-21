@@ -1,4 +1,39 @@
-// 階乗
+object MyModule { // このようなオブジェクトをモジュールと呼ぶ
+  def abs(n: Int): Int = {
+    if (n < 0) -n
+    else n
+  }
+
+  def formatAbs(x: Int) = {
+    val msg = "The absolute value of %d is %d"
+    msg.format(x, abs(x))
+  }
+
+  def main(args: Array[String]): Unit =
+    println(formatAbs(-42))
+}
+
+// MyModule が名前空間
+MyModule.main(Array("hoge"))
+MyModule.abs(-33)
+
+// オブジェクトメンバーにアクセスする場合は「.」とメンバーの名前を指定する
+
+// Scalaには演算子の概念はない
+// 2 + 1 の「+」はオブジェクト2のメンバ「+」である
+// 2 + 1 <=> 2.+(1)
+2 + 1
+2.+(1)
+
+// どのようなメソッド名も、「単一の引数」で呼び出す場合は、MyModule abs -33 のようにして同じ結果になる
+MyModule abs -33
+
+
+//
+// 2.4 高階関数: 関数に関数を渡す
+//
+
+// 階乗, 関数型ループの例
 def factorial(n: Int): Int = {
   // 再帰のヘルパー関数, go とか loop という名前をつけるのが慣例
   @annotation.tailrec // 末尾呼び出しでないメソッドの場合にコンパイルエラーにするアノテーション
@@ -36,3 +71,4 @@ def fib(n: Int): Long = {
 
 // 末尾再帰じゃない書き方だと、fib(100)なんて計算できないが、末尾再帰なら一瞬
 fib(100)
+
