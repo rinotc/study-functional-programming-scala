@@ -72,3 +72,41 @@ def fib(n: Int): Long = {
 // 末尾再帰じゃない書き方だと、fib(100)なんて計算できないが、末尾再帰なら一瞬
 fib(100)
 
+object MyModule2 { // このようなオブジェクトをモジュールと呼ぶ
+  def abs(n: Int): Int = {
+    if (n < 0) -n
+    else n
+  }
+
+  def factorial(n: Int): Int = {
+    @annotation.tailrec
+    def go(n: Int, acc: Int): Int =
+      if (n <= 0) acc
+      else go(n-1, n*acc)
+
+    go(n, 1)
+  }
+
+  def formatAbs(x: Int) = {
+    val msg = "The absolute value of %d is %d."
+    msg.format(x, abs(x))
+  }
+  // formatAbs と formatFactorial メソッドはぼぼ同じ => formatResultにまとめよう！
+  def formatFactorial(n: Int) = {
+    val msg = "The factorial of %d is %d."
+    msg.format(n, factorial(n))
+  }
+
+  // 上のformatAbs と formatFactorialをまとめた高階関数
+  def formatResult(name: String, n: Int, f: Int => Int) = { // 引数 f は Intを引数にとり、Intを返す関数
+    val msg = "The %sk of %d is %d"
+    msg.format(name, n, f(n))
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(formatResult("absolute value", -42, abs))
+    println(formatResult("factorial", 7, factorial))
+  }
+}
+
+MyModule2.main(Array(""))
