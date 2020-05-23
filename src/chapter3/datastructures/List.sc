@@ -1,5 +1,3 @@
-package chapter3.datastructures
-
 // Scala標準ライブラリで定義されているListの少し単純化したもの
 
 // 型パラメータの + 記号は共変(covariant)であることを示す. Dog が Animal の部分型であれば, List[Dog] は List[Animal] の部分型.
@@ -28,4 +26,12 @@ object List { // List のコンパニオンオブジェクト.
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
+}
+
+val x = List(1, 2, 3, 4) match {
+  case Cons(x, Cons(2, Cons(4, _))) => x
+  case Nil => 42
+  case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
+  case Cons(h, t) => h + List.sum(t)
+  case _ => 101
 }
