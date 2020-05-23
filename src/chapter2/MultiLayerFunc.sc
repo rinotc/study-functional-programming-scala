@@ -32,6 +32,9 @@ def findFirst[A](as: Array[A], p: A => Boolean): Int = { // String をハード�
   loop(0)
 }
 
+// 無名関数を利用したテスト
+findFirst(Array(7, 9, 11), (x: Int) => x == 9)
+
 // EXERCISE 2.2
 // 指定された比較関数に従って Array[A] がソートされているかどうか調べる isSorted を実装する
 
