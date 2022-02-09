@@ -1,10 +1,16 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Scala template
-*.class
-*.log
-
-.idea/
 functional-programming.iml
 
-.idea/vcs.xml
-out 
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.history
+.cache
+.lib/
+
+.idea/
+.bsp
