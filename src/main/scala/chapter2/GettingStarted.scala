@@ -51,4 +51,14 @@ object GettingStarted:
     go(n, 0, 1)
   end fib
 
+  /**
+   * [[formatAbs]] とほぼ同様 -> [[formatResult]] にまとめる
+   */
+  def formatFactorial(n: Int): String = "The factorial of %d is %d.".format(n, factorial(n))
+
+  /**
+   * [[formatAbs]] と [[formatFactorial]] をまとめた高階関数
+   */
+  def formatResult(name: String, n: Int, f: Int => Int): String = "The %s of %d is %d.".format(name, n, f(n))
+
 end GettingStarted
