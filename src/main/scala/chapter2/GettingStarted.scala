@@ -2,12 +2,14 @@ package chapter2
 
 import scala.annotation.tailrec
 
-object GettingStarted:
-  def abs(n: Int): Int = if n < 0 then -n else n
+object GettingStarted {
 
-  def formatAbs(x: Int): String =
+  def abs(n: Int): Int = if (n < 0) -n else n
+
+  def formatAbs(x: Int): String = {
     val msg = "The absolute value of %d is %d"
     msg.format(x, abs(x))
+  }
 
   /**
    * 階乗, 関数型ループの例
@@ -26,15 +28,15 @@ object GettingStarted:
    * @return
    *   整数`n`の階乗
    */
-  def factorial(n: Int): Int =
+  def factorial(n: Int): Int = {
     // 再帰のヘルパー関数, go とか loop という名前をつけるのが慣例
     @tailrec // 末尾呼び出しでないメソッドの場合にコンパイルエラーにするアノテーション
-    def go(n: Int, acc: Int): Int = // 残余値 n, 累積階乗 acc
-      if n <= 0 then acc
+    def go(n: Int, acc: Int): Int = { // 残余値 n, 累積階乗 acc
+      if (n <= 0) acc
       else go(n - 1, n * acc) // 例. 1 + go(n-1, n*acc) は末尾呼び出しではない
-
+    }
     go(n, 1)
-  end factorial
+  }
 
   /**
    * EXERCISE 2.1
@@ -43,13 +45,11 @@ object GettingStarted:
    * @see
    *   [[https://qiita.com/takuya0301/items/39121e0988750878e0f7]]
    */
-  def fib(n: Int): Long =
+  def fib(n: Int): Long = {
     @tailrec
-    def go(n: Int, a: Long, b: Long): Long =
-      if n == 0 then a else go(n - 1, b, a + b)
-
+    def go(n: Int, a: Long, b: Long): Long = if (n == 0) a else go(n - 1, b, a + b)
     go(n, 0, 1)
-  end fib
+  }
 
   /**
    * [[formatAbs]] とほぼ同様 -> [[formatResult]] にまとめる
@@ -61,4 +61,4 @@ object GettingStarted:
    */
   def formatResult(name: String, n: Int, f: Int => Int): String = "The %s of %d is %d.".format(name, n, f(n))
 
-end GettingStarted
+}
